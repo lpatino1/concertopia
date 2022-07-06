@@ -1,0 +1,35 @@
+body{
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden
+}
+
+h1, h2{
+    margin-top: 0;
+}
+
+.brand-logo{
+    margin-left: 1%;
+}
+
+.navSpacer{
+    margin-top: 2%;
+}
+.pageHeight{
+    height: 100vh
+}
+
+.asideCard{
+    height: 25vh;
+}
+
+.boxCheck{
+    border: 5px solid black;
+}
+
+.albumArt{
+    margin: 0 auto 0 auto;
+    height: 50%;
+    width: 100%;
+    padding: 2%;
+}
