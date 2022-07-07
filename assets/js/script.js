@@ -11,11 +11,8 @@ function locateUser() {
         fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${long}&key=888ab51ae378491c9cc6646f56803e81`)
             .then(response => response.json())
             .then(function (data) {
-                locateBtn.removeClass("btn")
-                locateBtn.removeClass("waves-effect")
-                locateBtn.removeClass("waves-light")
-                locateBtn.removeClass("locate")
-                locateBtn.text(`${data.results[0].components.town},${data.results[0].components.state_code}`)
+                locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
+                locateBtn.remove()
                 localStorage.setItem("data", JSON.stringify(data))
             }
             )
