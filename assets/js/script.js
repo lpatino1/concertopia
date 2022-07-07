@@ -1,17 +1,21 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 //Ticketmaster API
-var requestTickermaster = 'https://app.ticketmaster.com/discovery/v2/events.json?apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ';
+var searchTmEl = $("#searchTm");
+var nearYouTmEl = $("#nearYouTm");
 
-function getEvents (request){
-    fetch(requestTickermaster)
-        .then(response => response.json())
-        .then(function (data){
-            console.log(data);
-        })
-}
+var requestTickermaster = 'https://app.ticketmaster.com/discovery/v2/events.json?&apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ';
 
-getEvents(requestTickermaster);
+// function getEvents (request){
+//     const location = JSON.parse(localStorage.getItem("data"));
+//     if()
+// }
+
+// searchTmEl.click(getEvents);
+// nearYouTmEl.click(getEvents);
+// getEvents();
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////readability/modularity
 var locateBtn = $(".locate")
 
