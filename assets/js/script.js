@@ -35,13 +35,13 @@ tBody = $("tbody")
 //temp api for music metadata, pending api key, but this gets the gist across
 const options = {
     method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '2ae20cebb7mshe4506161a53081cp173350jsn28fba4d2ea65',
-        'X-RapidAPI-Host': 'theaudiodb.p.rapidapi.com'
-    }
+    mode: "no-cors",
+    type: "itunes",
+    country: "us",
+    format: "singles",
 };
 
-fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&format=singles', options)
+fetch('http://www.theaudiodb.com/api/v1/json/523532/trending.php?country=us&type=itunes&format=singles', options)
     .then(response => response.json())
     .then(function (data) {
         console.log(data)
