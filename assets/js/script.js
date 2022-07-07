@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+////////////////////////////////////////////////////////////////////////////////
+
+//Ticketmaster API
+var requestTickermaster = 'https://app.ticketmaster.com/discovery/v2/events.json?apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ';
+
+function getEvents (request){
+    fetch(requestTickermaster)
+        .then(response => response.json())
+        .then(function (data){
+            console.log(data);
+        })
+}
+
+getEvents(requestTickermaster);
+=======
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////readability/modularity
 var locateBtn = $(".locate")
 
@@ -56,3 +72,4 @@ fetch('http://www.theaudiodb.com/api/v1/json/523532/trending.php?country=us&type
         }
     })
     .catch(err => console.error(err));
+>>>>>>> dev
