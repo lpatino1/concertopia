@@ -17,7 +17,7 @@
     <div class="navbar-fixed">
         <nav class="grey darken-4">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">Concertopio</a>
+                <a href="#" class="brand-logo">Concertopia</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li> <input placeholder="Artist Name" id="artistName" type="text" class="validate">
                         <label for="artistName"></label>
@@ -85,11 +85,17 @@
                         <div class="card horizontal asideCard">
                             <div class="card-stacked">
                                 <div class="card-content">
-                                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                    <p>Find events near you:</p>
+                                    <div class="card-content grey lighten-4">
+                                        <div id="genTicketmaster"></div>
+                                      </div>
                                 </div>
-                                <div class="card-action">
-                                    <a href="#">This is a link</a>
-                                </div>
+                                <div class="card-tabs">
+                                    <ul class="tabs tabs-fixed-width">
+                                      <li class="tab"><a href="#searchTM">Search for an artist</a></li>
+                                      <li class="tab"><a class="active" href="#nearYouTM">Events near You</a></li>
+                                    </ul>
+                                  </div>
                             </div>
                         </div>
                     </div>

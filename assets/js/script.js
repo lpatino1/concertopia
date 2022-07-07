@@ -1,3 +1,19 @@
+
+////////////////////////////////////////////////////////////////////////////////
+
+//Ticketmaster API
+var requestTickermaster = 'https://app.ticketmaster.com/discovery/v2/events.json?apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ';
+
+function getEvents (request){
+    fetch(requestTickermaster)
+        .then(response => response.json())
+        .then(function (data){
+            console.log(data);
+        })
+}
+
+getEvents(requestTickermaster);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////readability/modularity
 var locateBtn = $(".locate")
 
@@ -34,7 +50,7 @@ function locationDenied() {
 
 
 tBody = $("tbody")
-//temp api for music metadata, pending api key, but this gets the gist across
+
 const options = {
     method: 'GET',
     headers: {
@@ -58,3 +74,36 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
         }
     })
     .catch(err => console.error(err));
+
+//function for artist search
+var searchArt = $("#artistName")
+searchArt.submit(function(event){
+    
+    event.stopPropagation();
+    
+    const optionsSearch = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '2ae20cebb7mshe4506161a53081cp173350jsn28fba4d2ea65',
+            'X-RapidAPI-Host': 'theaudiodb.p.rapidapi.com'
+        }
+    };
+
+    fetch(`https://theaudiodb.p.rapidapi.com/track-top10.php?s=${$(searchArt.val())}`, optionsSearch)
+    .then(response => response.json())
+    .then(function (data) {
+        console.log(data)
+        $("h1").text(`${data.trending[0].strTrack}`)
+        $("h2").text(`${data.trending[0].strArtist}`)
+        $("img").attr("src",`${data.trending[0].strTrackThumb}`)
+        for (i = 1; i < data.trending.length; i++) {
+            var tRow = tBody.append(`<tr>`)
+            tRow.append(`<td>${data.trending[i].strTrack}</td>`)
+            tRow.append(`<td>${data.trending[i].strArtist}</td>`)
+            tRow.append(`<td>${data.trending[i].strAlbum}</td>`)
+        }
+    })
+    .catch(err => console.error(err));
+}
+
+)
