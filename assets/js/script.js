@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-////////////////////////////////////////////////////////////////////////////////
-
-//Ticketmaster API
-var requestTickermaster = 'https://app.ticketmaster.com/discovery/v2/events.json?apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ';
-
-function getEvents (request){
-    fetch(requestTickermaster)
-        .then(response => response.json())
-        .then(function (data){
-            console.log(data);
-        })
-}
-
-getEvents(requestTickermaster);
-=======
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////readability/modularity
 var locateBtn = $(".locate")
 
@@ -47,17 +31,19 @@ function locationDenied() {
 
 
 //condition for if user refuses location info - display USA top charts, functionality wont change much except ticketmaster search range will be updated to the whole US
+
+
 tBody = $("tbody")
 //temp api for music metadata, pending api key, but this gets the gist across
 const options = {
     method: 'GET',
-    mode: "no-cors",
-    type: "itunes",
-    country: "us",
-    format: "singles",
+    headers: {
+        'X-RapidAPI-Key': '2ae20cebb7mshe4506161a53081cp173350jsn28fba4d2ea65',
+        'X-RapidAPI-Host': 'theaudiodb.p.rapidapi.com'
+    }
 };
 
-fetch('http://www.theaudiodb.com/api/v1/json/523532/trending.php?country=us&type=itunes&format=singles', options)
+fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&format=singles', options)
     .then(response => response.json())
     .then(function (data) {
         console.log(data)
@@ -72,4 +58,3 @@ fetch('http://www.theaudiodb.com/api/v1/json/523532/trending.php?country=us&type
         }
     })
     .catch(err => console.error(err));
->>>>>>> dev
