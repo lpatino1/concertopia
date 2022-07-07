@@ -50,7 +50,7 @@ function locationDenied() {
 
 
 tBody = $("tbody")
-
+//on page load popular artsists/song info is shown
 const options = {
     method: 'GET',
     headers: {
@@ -67,7 +67,7 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
         $("h2").text(`${data.trending[0].strArtist}`)
         $("img").attr("src",`${data.trending[0].strTrackThumb}`)
         for (i = 1; i < data.trending.length; i++) {
-            var tRow = tBody.append(`<tr>`)
+            var tRow = tBody.append(`<tr class="currentData">`)
             tRow.append(`<td>${data.trending[i].strTrack}</td>`)
             tRow.append(`<td>${data.trending[i].strArtist}</td>`)
             tRow.append(`<td>${data.trending[i].strAlbum}</td>`)
@@ -77,7 +77,7 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
 
 //function for artist search
 var searchArt = $("#artistName")
-searchArt.submit(function(event){
+$(".submitBtn").click(function(event){
     
     event.stopPropagation();
     
@@ -89,21 +89,33 @@ searchArt.submit(function(event){
         }
     };
 
-    fetch(`https://theaudiodb.p.rapidapi.com/track-top10.php?s=${$(searchArt.val())}`, optionsSearch)
+    fetch(`https://theaudiodb.p.rapidapi.com/track-top10.php?s=${searchArt.val()}`, optionsSearch)
     .then(response => response.json())
     .then(function (data) {
+        tBody.empty();
         console.log(data)
-        $("h1").text(`${data.trending[0].strTrack}`)
-        $("h2").text(`${data.trending[0].strArtist}`)
-        $("img").attr("src",`${data.trending[0].strTrackThumb}`)
-        for (i = 1; i < data.trending.length; i++) {
+        if(data.track !== null){
+        $("h1").text(`${data.track[0].strTrack}`)
+        $("h2").text(`${data.track[0].strArtist}`)
+
+        if(data.track[0].strTrackThumb === null){
+            $("img").attr("src","./assets/images/placeholder.png")
+        }else{
+            $("img").attr("src",`${data.track[0].strTrackThumb}`)}
+
+        for (i = 1; i < data.track.length; i++) {
             var tRow = tBody.append(`<tr>`)
-            tRow.append(`<td>${data.trending[i].strTrack}</td>`)
-            tRow.append(`<td>${data.trending[i].strArtist}</td>`)
-            tRow.append(`<td>${data.trending[i].strAlbum}</td>`)
+            tRow.append(`<td>${data.track[i].strTrack}</td>`)
+            tRow.append(`<td>${data.track[i].strArtist}</td>`)
+            tRow.append(`<td>${data.track[i].strAlbum}</td>`)
         }
-    })
-    .catch(err => console.error(err));
+    }else{
+        $("h1").text(`Artist not found, please search for another.`)
+        $("h2").text("")
+        $("img").attr("src","./assets/images/placeholder.png")
+    }
+
+})
 }
 
 )
