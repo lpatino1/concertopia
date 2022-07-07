@@ -8,8 +8,17 @@ h1, h2{
     margin-top: 0;
 }
 
+.container {
+    width: 100vw;
+}
+
 .brand-logo{
     margin-left: 1%;
+}
+
+.navbar-fixed {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .navSpacer{
