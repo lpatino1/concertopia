@@ -22,7 +22,7 @@ h1, h2{
     height: 100vh
 }
 
-table{
+.scroll{
     overflow-y: scroll;
 }
 

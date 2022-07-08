@@ -109,7 +109,7 @@ var searchArt = $("#artistName")
 $(".submitBtn").click(function (event) {
 
     event.stopPropagation();
-
+    
     const optionsSearch = {
         method: 'GET',
         headers: {
@@ -122,11 +122,18 @@ $(".submitBtn").click(function (event) {
         .then(response => response.json())
         .then(function (data) {
             tBody.empty();
+            $("#artistName").val("");
             console.log(data)
+
+            var pageTitle
             //wikipedia api for artist bios
-            fetch()
+            fetch(`https://api.lyrics.ovh/v1/Macklemore/Otherside`)
                 .then(response => response.json())
-                .then()
+                .then(function(data){
+                    
+                    console.log(data)
+                }
+                )
 
             if (data.track !== null) {
                 $("h1").text(`${data.track[0].strTrack}`)
