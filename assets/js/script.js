@@ -7,48 +7,6 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
 });
 
-//Ticketmaster API
-var searchTmEl = $("#searchTm");
-var nearYouTmEl = $("#nearYouTm");
-var tmContent = $("#genTicketmaster");
-
-var requestTickermaster = 'https://app.ticketmaster.com/discovery/v2/events.json?size=100&classificationName=music&countryCode=US&apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ';
-
-function getEvents(request) {
-    const location = JSON.parse(localStorage.getItem("data"));
-    if (location !== null) {
-        fetch(`https://app.ticketmaster.com/discovery/v2/events.json?q=${location}&classificationName=music&countryCode=US&apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ`)
-            .then(response => response.json())
-            .then(function (data) {
-                let index = 3;
-                for (i = 0; i < index; i++) {
-                    //create and style
-                    let event = ($("<p>").text(`${(data._embedded.events[i].name)}`));
-                    //append
-                    tmContent.append(event);
-                }
-            })
-    } else {
-        fetch(requestTickermaster)
-            .then(response => response.json())
-            .then(function (data) {
-                console.log(data);
-                for (i = 0; i < 100; i += 25) {
-                    //create and style
-                    let event = ($("<li>").text(`${(data._embedded.events[i].name)}`));
-                    event.css("style", "display: none");
-                    //append
-                    tmContent.append(event);
-                }
-            })
-    }
-}
-
-searchTmEl.click(getEvents);
-nearYouTmEl.click(getEvents);
-getEvents();
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////readability/modularity
 var locateBtn = $(".locate")
 
@@ -212,3 +170,40 @@ const play = ({
     playerInstance: new Spotify.Player({ name: "..." }),
     spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
   });
+
+  window.onSpotifyWebPlaybackSDKReady = () => {
+    const token = 'BQAJAkKrkod5qCghiemtF1ziauo7mdDJWqdlz_GDCwEiW9V4z3PHz5T7nF5rXR_OK2vSEip-9072N8-gzxdwHZMtkfJeiw3EXsuX46f4ZdnXVGPzbGOlNRy06u9ofatFnc5ixdR62-6-uV7DMIi9MQdVcpAqcOGauxIIwU5GFaRB9LQHG5gC-vVHniezdr8U';
+    const player = new Spotify.Player({
+        name: 'Web Playback SDK Quick Start Player',
+        getOAuthToken: cb => { cb(token); },
+        volume: 0.5
+    });
+
+    // Ready
+    player.addListener('ready', ({ device_id }) => {
+        console.log('Ready with Device ID', device_id);
+    });
+
+    // Not Ready
+    player.addListener('not_ready', ({ device_id }) => {
+        console.log('Device ID has gone offline', device_id);
+    });
+
+    player.addListener('initialization_error', ({ message }) => {
+        console.error(message);
+    });
+
+    player.addListener('authentication_error', ({ message }) => {
+        console.error(message);
+    });
+
+    player.addListener('account_error', ({ message }) => {
+        console.error(message);
+    });
+
+    document.getElementById('togglePlay').onclick = function() {
+      player.togglePlay();
+    };
+
+    player.connect();
+}
