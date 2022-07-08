@@ -2,12 +2,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 //Ticketmaster Widget Location
 
-<<<<<<< HEAD
-=======
 //Mobile Collapse Navbar from Materialize
-$(document).ready(function(){
+$(document).ready(function () {
     $('.sidenav').sidenav();
-  });
+});
 
 //Ticketmaster API
 var searchTmEl = $("#searchTm");
@@ -16,40 +14,39 @@ var tmContent = $("#genTicketmaster");
 
 var requestTickermaster = 'https://app.ticketmaster.com/discovery/v2/events.json?size=100&classificationName=music&countryCode=US&apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ';
 
-function getEvents (request){
+function getEvents(request) {
     const location = JSON.parse(localStorage.getItem("data"));
-    if(location !== null){
+    if (location !== null) {
         fetch(`https://app.ticketmaster.com/discovery/v2/events.json?q=${location}&classificationName=music&countryCode=US&apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ`)
-        .then(response => response.json())
-        .then(function (data){
-            let index =3;
-            for(i=0; i<index; i++){
-                //create and style
-                let event = ($("<p>").text(`${(data._embedded.events[i].name)}`));
-                //append
-                tmContent.append(event);
-            }
-        })
-    } else{
+            .then(response => response.json())
+            .then(function (data) {
+                let index = 3;
+                for (i = 0; i < index; i++) {
+                    //create and style
+                    let event = ($("<p>").text(`${(data._embedded.events[i].name)}`));
+                    //append
+                    tmContent.append(event);
+                }
+            })
+    } else {
         fetch(requestTickermaster)
-        .then(response=>response.json())
-        .then(function (data){
-            console.log(data);
-            for(i=0; i<100; i+=25){
-                //create and style
-                let event = ($("<li>").text(`${(data._embedded.events[i].name)}`));
-                event.css("style", "display: none");
-                //append
-                tmContent.append(event);
-            }
-        })
+            .then(response => response.json())
+            .then(function (data) {
+                console.log(data);
+                for (i = 0; i < 100; i += 25) {
+                    //create and style
+                    let event = ($("<li>").text(`${(data._embedded.events[i].name)}`));
+                    event.css("style", "display: none");
+                    //append
+                    tmContent.append(event);
+                }
+            })
     }
 }
 
 searchTmEl.click(getEvents);
 nearYouTmEl.click(getEvents);
 getEvents();
->>>>>>> dev
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////readability/modularity
@@ -113,14 +110,14 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
         searchName = data.trending[0].strArtist
         searchSong = data.trending[0].strTrack
         fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
-        .then(response => response.json())
-        .then(function(data){
-            var lyricsArr = data.lyrics.split("\n")
-            for(i = 0; i< lyricsArr.length; i++){
-                $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)  
+            .then(response => response.json())
+            .then(function (data) {
+                var lyricsArr = data.lyrics.split("\n")
+                for (i = 0; i < lyricsArr.length; i++) {
+                    $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)
+                }
             }
-        }
-        )
+            )
     })
     .catch(err => console.error(err));
 
@@ -129,7 +126,7 @@ var searchArt = $("#artistName")
 $(".submitBtn").click(function (event) {
 
     event.stopPropagation();
-    
+
     const optionsSearch = {
         method: 'GET',
         headers: {
@@ -143,47 +140,49 @@ $(".submitBtn").click(function (event) {
         .then(function (data) {
             tBody.empty();
             $("#songLyrics").empty()
-            $("#artistName").val("");
+
             console.log(data)
-            searchName= data.track[0].strArtist
+            searchName = data.track[0].strArtist
             searchSong = data.track[0].strTrack
 
 
-            
+
             //lyrics api
             fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
                 .then(response => response.json())
-                .then(function(data){
-                    var lyricsArr = data.lyrics.split("\n")
-                    for(i = 0; i< lyricsArr.length; i++){
-                        $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)  
-                    }
+                .then(function (data) {
+                    if (data.lyrics !== null){
+                var lyricsArr = data.lyrics.split("\n")
+                for (i = 0; i < lyricsArr.length; i++) {
+                    $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)
                 }
-                )
-
-            if (data.track !== null) {
-                $("h1").text(`${data.track[0].strTrack}`)
-                $("h2").text(`${data.track[0].strArtist}`)
-
-                if (data.track[0].strTrackThumb === null) {
-                    $("img").attr("src", "./assets/images/placeholder.png")
-                } else {
-                    $("img").attr("src", `${data.track[0].strTrackThumb}`)
-                }
-
-                for (i = 1; i < data.track.length; i++) {
-                    var tRow = tBody.append(`<tr>`)
-                    tRow.append(`<td>${data.track[i].strTrack}</td>`)
-                    tRow.append(`<td>${data.track[i].strArtist}</td>`)
-                    tRow.append(`<td>${data.track[i].strAlbum}</td>`)
-                }
-            } else {
-                $("h1").text(`Artist not found, please search for another.`)
-                $("h2").text("")
-                $("img").attr("src", "./assets/images/placeholder.png")
             }
+        }
+        )
 
-        })
+    if (data.track !== null) {
+        $("h1").text(`${data.track[0].strTrack}`)
+        $("h2").text(`${data.track[0].strArtist}`)
+
+        if (data.track[0].strTrackThumb === null) {
+            $("img").attr("src", "./assets/images/placeholder.png")
+        } else {
+            $("img").attr("src", `${data.track[0].strTrackThumb}`)
+        }
+
+        for (i = 1; i < data.track.length; i++) {
+            var tRow = tBody.append(`<tr>`)
+            tRow.append(`<td>${data.track[i].strTrack}</td>`)
+            tRow.append(`<td>${data.track[i].strArtist}</td>`)
+            tRow.append(`<td>${data.track[i].strAlbum}</td>`)
+        }
+    } else {
+        $("h1").text(`Artist not found, please search for another.`)
+        $("h2").text("")
+        $("img").attr("src", "./assets/images/placeholder.png")
+    }
+
+})
 }
 
 )
