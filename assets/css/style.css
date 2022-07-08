@@ -31,7 +31,12 @@ h1, h2{
     height: 100vh
 }
 
-table{
+#ulScroll{
+    max-height:200px;
+    overflow-y: scroll
+}
+.scroll{
+    max-height: 370px;
     overflow-y: scroll;
 }
 
