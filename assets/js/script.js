@@ -212,3 +212,40 @@ const play = ({
     playerInstance: new Spotify.Player({ name: "..." }),
     spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
   });
+
+  window.onSpotifyWebPlaybackSDKReady = () => {
+    const token = 'BQAJAkKrkod5qCghiemtF1ziauo7mdDJWqdlz_GDCwEiW9V4z3PHz5T7nF5rXR_OK2vSEip-9072N8-gzxdwHZMtkfJeiw3EXsuX46f4ZdnXVGPzbGOlNRy06u9ofatFnc5ixdR62-6-uV7DMIi9MQdVcpAqcOGauxIIwU5GFaRB9LQHG5gC-vVHniezdr8U';
+    const player = new Spotify.Player({
+        name: 'Web Playback SDK Quick Start Player',
+        getOAuthToken: cb => { cb(token); },
+        volume: 0.5
+    });
+
+    // Ready
+    player.addListener('ready', ({ device_id }) => {
+        console.log('Ready with Device ID', device_id);
+    });
+
+    // Not Ready
+    player.addListener('not_ready', ({ device_id }) => {
+        console.log('Device ID has gone offline', device_id);
+    });
+
+    player.addListener('initialization_error', ({ message }) => {
+        console.error(message);
+    });
+
+    player.addListener('authentication_error', ({ message }) => {
+        console.error(message);
+    });
+
+    player.addListener('account_error', ({ message }) => {
+        console.error(message);
+    });
+
+    document.getElementById('togglePlay').onclick = function() {
+      player.togglePlay();
+    };
+
+    player.connect();
+}
