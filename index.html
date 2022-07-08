@@ -3,7 +3,7 @@
 
 <head>
     <meta>
-    <title></title>
+    <title>Concertopia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,6 @@
 </head>
 
 <body>
-   
 
 <!-- Mobile Collapse, from Materialize: -->
       
@@ -28,6 +27,7 @@
         <li><input placeholder="Artist Name" id="artistName" type="text" class="submit white-text">
             <label for="artistName"></label>
         </li>
+        <li><a class="waves-effect waves-light btn submitBtn">Search</a></li>
         <li><a href="badges.html">About</a></li>
       </ul>
     </div>
@@ -53,15 +53,11 @@
                     <div class="col s7">
                         <h1>Song Name</h1>
                         <h2>Artist Name</h2>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi sequi reprehenderit explicabo
-                            asperiores pariatur harum deserunt voluptatum, natus molestias soluta enim neque odit id
-                            nisi excepturi eius itaque inventore facere?</p>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi sequi reprehenderit explicabo
-                            asperiores pariatur harum deserunt voluptatum, natus molestias soluta enim neque odit id
-                            nisi excepturi eius itaque inventore facere?</p>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi sequi reprehenderit explicabo
-                            asperiores pariatur harum deserunt voluptatum, natus molestias soluta enim neque odit id
-                            nisi excepturi eius itaque inventore facere?</p>
+                        <div id="ulScroll">
+                            <ul id="songLyrics">
+                                
+                            </ul>
+                    </div>
                     </div>
                     <div class="col s4">
                         <img src="./assets/images/placeholder.png" class="albumArt">
@@ -71,7 +67,7 @@
 
                 <div class="row">
                     <div class="col s1"></div>
-                    <div class="col s11">
+                    <div class="col s11 scroll">
                         <table>
                             <thead>
                                 <tr>
@@ -95,21 +91,9 @@
                 <div class="row ">
                     <div class="col s1"></div>
                     <div class="col s10">
-                        <div class="card horizontal asideCard">
-                            <div class="card-stacked">
-                                <div class="card-content">
-                                    <p>Find events near you:</p>
-                                    <div class="card-content grey lighten-4">
-                                        <ul id="genTicketmaster"></ul>
-                                      </div>
-                                </div>
-                                <div class="card-tabs">
-                                    <ul class="tabs tabs-fixed-width">
-                                      <li class="tab"><a href="#" id ="#searchTm">Search for an artist</a></li>
-                                      <li class="tab"><a class="active" href="#" id="#nearYouTm">Events near You</a></li>
-                                    </ul>
-                                  </div>
-                            </div>
+                        <div class ="card-stacked events-container">
+                        <div w-type="event-discovery" w-tmapikey="K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="music" w-theme="simple" w-colorscheme="light" w-width="512" w-height="286" w-size="15" w-border="0" w-borderradius="4" w-radius="50" w-period="month" w-layout="horizontal" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="xxl" w-titlelink="off" w-sorting="groupByName" w-id="id_tnbbka" w-source="" w-branding="Ticketmaster" w-latlong="34.0390107,-118.2672801">
+                        </div>
                         </div>
                     </div>
                     <div class="col s1"></div>
@@ -202,6 +186,7 @@
 
     </footer>
     <!-- Compiled and minified JavaScript -->
+    <script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

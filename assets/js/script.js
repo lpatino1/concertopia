@@ -1,10 +1,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
+//Ticketmaster Widget Location
 
 //Mobile Collapse Navbar from Materialize
-$(document).ready(function(){
+$(document).ready(function () {
     $('.sidenav').sidenav();
-  });
+});
 
 //Ticketmaster API
 var searchTmEl = $("#searchTm");
@@ -13,33 +14,33 @@ var tmContent = $("#genTicketmaster");
 
 var requestTickermaster = 'https://app.ticketmaster.com/discovery/v2/events.json?size=100&classificationName=music&countryCode=US&apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ';
 
-function getEvents (request){
+function getEvents(request) {
     const location = JSON.parse(localStorage.getItem("data"));
-    if(location !== null){
+    if (location !== null) {
         fetch(`https://app.ticketmaster.com/discovery/v2/events.json?q=${location}&classificationName=music&countryCode=US&apikey=K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ`)
-        .then(response => response.json())
-        .then(function (data){
-            let index =3;
-            for(i=0; i<index; i++){
-                //create and style
-                let event = ($("<p>").text(`${(data._embedded.events[i].name)}`));
-                //append
-                tmContent.append(event);
-            }
-        })
-    } else{
+            .then(response => response.json())
+            .then(function (data) {
+                let index = 3;
+                for (i = 0; i < index; i++) {
+                    //create and style
+                    let event = ($("<p>").text(`${(data._embedded.events[i].name)}`));
+                    //append
+                    tmContent.append(event);
+                }
+            })
+    } else {
         fetch(requestTickermaster)
-        .then(response=>response.json())
-        .then(function (data){
-            console.log(data);
-            for(i=0; i<100; i+=25){
-                //create and style
-                let event = ($("<li>").text(`${(data._embedded.events[i].name)}`));
-                event.css("style", "display: none");
-                //append
-                tmContent.append(event);
-            }
-        })
+            .then(response => response.json())
+            .then(function (data) {
+                console.log(data);
+                for (i = 0; i < 100; i += 25) {
+                    //create and style
+                    let event = ($("<li>").text(`${(data._embedded.events[i].name)}`));
+                    event.css("style", "display: none");
+                    //append
+                    tmContent.append(event);
+                }
+            })
     }
 }
 
@@ -99,22 +100,33 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
         console.log(data)
         $("h1").text(`${data.trending[0].strTrack}`)
         $("h2").text(`${data.trending[0].strArtist}`)
-        $("img").attr("src",`${data.trending[0].strTrackThumb}`)
+        $("img").attr("src", `${data.trending[0].strTrackThumb}`)
         for (i = 1; i < data.trending.length; i++) {
             var tRow = tBody.append(`<tr class="currentData">`)
             tRow.append(`<td>${data.trending[i].strTrack}</td>`)
             tRow.append(`<td>${data.trending[i].strArtist}</td>`)
             tRow.append(`<td>${data.trending[i].strAlbum}</td>`)
         }
+        searchName = data.trending[0].strArtist
+        searchSong = data.trending[0].strTrack
+        fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
+            .then(response => response.json())
+            .then(function (data) {
+                var lyricsArr = data.lyrics.split("\n")
+                for (i = 0; i < lyricsArr.length; i++) {
+                    $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)
+                }
+            }
+            )
     })
     .catch(err => console.error(err));
 
 //function for artist search
 var searchArt = $("#artistName")
-$(".submitBtn").click(function(event){
-    
+$(".submitBtn").click(function (event) {
+
     event.stopPropagation();
-    
+
     const optionsSearch = {
         method: 'GET',
         headers: {
@@ -124,18 +136,39 @@ $(".submitBtn").click(function(event){
     };
 
     fetch(`https://theaudiodb.p.rapidapi.com/track-top10.php?s=${searchArt.val()}`, optionsSearch)
-    .then(response => response.json())
-    .then(function (data) {
-        tBody.empty();
-        console.log(data)
-        if(data.track !== null){
+        .then(response => response.json())
+        .then(function (data) {
+            tBody.empty();
+            $("#songLyrics").empty()
+
+            console.log(data)
+            searchName = data.track[0].strArtist
+            searchSong = data.track[0].strTrack
+
+
+
+            //lyrics api
+            fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
+                .then(response => response.json())
+                .then(function (data) {
+                    if (data.lyrics !== null){
+                var lyricsArr = data.lyrics.split("\n")
+                for (i = 0; i < lyricsArr.length; i++) {
+                    $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)
+                }
+            }
+        }
+        )
+
+    if (data.track !== null) {
         $("h1").text(`${data.track[0].strTrack}`)
         $("h2").text(`${data.track[0].strArtist}`)
 
-        if(data.track[0].strTrackThumb === null){
-            $("img").attr("src","./assets/images/placeholder.png")
-        }else{
-            $("img").attr("src",`${data.track[0].strTrackThumb}`)}
+        if (data.track[0].strTrackThumb === null) {
+            $("img").attr("src", "./assets/images/placeholder.png")
+        } else {
+            $("img").attr("src", `${data.track[0].strTrackThumb}`)
+        }
 
         for (i = 1; i < data.track.length; i++) {
             var tRow = tBody.append(`<tr>`)
@@ -143,10 +176,10 @@ $(".submitBtn").click(function(event){
             tRow.append(`<td>${data.track[i].strArtist}</td>`)
             tRow.append(`<td>${data.track[i].strAlbum}</td>`)
         }
-    }else{
+    } else {
         $("h1").text(`Artist not found, please search for another.`)
         $("h2").text("")
-        $("img").attr("src","./assets/images/placeholder.png")
+        $("img").attr("src", "./assets/images/placeholder.png")
     }
 
 })

@@ -31,7 +31,12 @@ h1, h2{
     height: 100vh
 }
 
-table{
+#ulScroll{
+    max-height:200px;
+    overflow-y: scroll
+}
+.scroll{
+    max-height: 370px;
     overflow-y: scroll;
 }
 
@@ -48,4 +53,9 @@ table{
     height: 50%;
     width: 100%;
     padding: 2%;
+}
+
+.events-container{
+    display: flex;
+    flex-wrap: wrap;
 }
