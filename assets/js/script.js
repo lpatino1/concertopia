@@ -122,16 +122,23 @@ $(".submitBtn").click(function (event) {
         .then(response => response.json())
         .then(function (data) {
             tBody.empty();
+            $("#songLyrics").empty()
             $("#artistName").val("");
             console.log(data)
+            searchName= data.track[0].strArtist
+            searchSong = data.track[0].strTrack
 
-            var pageTitle
+
+            
             //wikipedia api for artist bios
-            fetch(`https://api.lyrics.ovh/v1/Macklemore/Otherside`)
+            fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
                 .then(response => response.json())
                 .then(function(data){
-                    
-                    console.log(data)
+                   // $("#songLyrics").text(data.lyrics)
+                    var lyricsArr = data.lyrics.split("\n")
+                    for(i = 0; i< lyricsArr.length; i++){
+                        $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)  
+                    }
                 }
                 )
 
