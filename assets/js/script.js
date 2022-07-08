@@ -1,6 +1,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+//Mobile Collapse Navbar from Materialize
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
 //Ticketmaster API
 var searchTmEl = $("#searchTm");
 var nearYouTmEl = $("#nearYouTm");
