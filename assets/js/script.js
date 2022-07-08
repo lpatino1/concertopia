@@ -106,6 +106,17 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
             tRow.append(`<td>${data.trending[i].strArtist}</td>`)
             tRow.append(`<td>${data.trending[i].strAlbum}</td>`)
         }
+        searchName = data.trending[0].strArtist
+        searchSong = data.trending[0].strTrack
+        fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
+        .then(response => response.json())
+        .then(function(data){
+            var lyricsArr = data.lyrics.split("\n")
+            for(i = 0; i< lyricsArr.length; i++){
+                $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)  
+            }
+        }
+        )
     })
     .catch(err => console.error(err));
 
@@ -135,11 +146,10 @@ $(".submitBtn").click(function (event) {
 
 
             
-            //wikipedia api for artist bios
+            //lyrics api
             fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
                 .then(response => response.json())
                 .then(function(data){
-                   // $("#songLyrics").text(data.lyrics)
                     var lyricsArr = data.lyrics.split("\n")
                     for(i = 0; i< lyricsArr.length; i++){
                         $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)  
