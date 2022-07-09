@@ -1,10 +1,11 @@
 *{
     font-family: 'Roboto', sans-serif;
+    font-weight: 600;
 }
 body{
     height: 100vh;
     width: 100vw;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 h1, h2{
@@ -16,8 +17,13 @@ h1, h2{
 }
 
 .brand-logo{
-    margin-left: 1%;
+    margin-left: 6%;
 }
+
+.marg-right{
+    margin-right: 2.4%;
+}
+
 
 .navbar-fixed {
     display: flex;
@@ -36,7 +42,7 @@ h1, h2{
     overflow-y: scroll
 }
 .scroll{
-    max-height: 370px;
+    max-height: 400px;
     overflow-y: scroll;
 }
 
@@ -58,4 +64,8 @@ h1, h2{
 .events-container{
     display: flex;
     flex-wrap: wrap;
+}
+
+#max-table{
+    max-height: 21vh;
 }
