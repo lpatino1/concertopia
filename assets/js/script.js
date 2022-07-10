@@ -29,7 +29,7 @@ function locateUser() {
     }, locationDenied)
 }
 
-$("body").on("click", locateBtn, locateUser)
+locateBtn.click(locateUser)
 
 //failure call back
 function locationDenied() {
@@ -91,7 +91,7 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
 
 //function for artist search
 var searchArt = $(".artistName")
-$("body").on("click",$(".submitBtn"),function (event) {
+$(".submitBtn").click(function (event) {
 
     event.stopPropagation();
 
@@ -107,7 +107,7 @@ $("body").on("click",$(".submitBtn"),function (event) {
         .then(response => response.json())
         .then(function (data) {
             tBody.empty();
-            $("#songLyrics").empty()
+            
 
             console.log(data)
 
@@ -122,6 +122,7 @@ $("body").on("click",$(".submitBtn"),function (event) {
             fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
                 .then(response => response.json())
                 .then(function (data) {
+                    $("#songLyrics").empty()
                     if (data.lyrics !== null) {
                         var lyricsArr = data.lyrics.split("\n")
                         for (i = 0; i < lyricsArr.length; i++) {
@@ -142,7 +143,7 @@ $("body").on("click",$(".submitBtn"),function (event) {
                 }
 
                 for (i = 1; i < data.track.length; i++) {
-                    var tRow = tBody.append(`<tr>`)[i]
+                    var tRow = tBody.append(`<tr>`)
                     tRow.append(`<td>${data.track[i].strTrack}</td>`)
                     tRow.append(`<td>${data.track[i].strArtist}</td>`)
                     tRow.append(`<td>${data.track[i].strAlbum}</td>`)
@@ -160,24 +161,26 @@ $("body").on("click",$(".submitBtn"),function (event) {
 )
 
 
-$("body").on("click", ".listen", function (event) {
-    event.stopPropagation()
-    console.log("working")
+tBody.on("click", function (event) {
+    event.stopPropagation
+    if (event.target.classList.contains("listen")){
+        event.stopPropagation()
+        console.log("working")
 
-    if(localStorage.getItem("songHist") !== null){
-     
-    
-    console.log($().html())
-    localStorage.setItem(`songHist`, JSON.stringify($(event.target).parent().parent().children().html()))
+        if(localStorage.getItem("songHist") !== null){
+        
+        
+        console.log($(event.target).parent().parent().html())
+        localStorage.setItem(`songHist`, JSON.stringify($(event.target).parent().parent().children().html()))
 
+        
+        var histAppend =  JSON.parse(localStorage.getItem(`songHist`))
+        $(".histTable").append(histAppend)
     
-       var histAppend =  JSON.parse(localStorage.getItem(`songHist`))
-       $(".histTable").append(histAppend)
-   
-    //spotify code
-}else{
-    localStorage.setItem("songHist", JSON.stringify($(event.target).parent().parent().children().html()))
-}})
+        //spotify code
+    }else{
+        localStorage.setItem("songHist", JSON.stringify($(event.target).parent().parent().html()))
+}}})
 
 // Spotify SDK URI
 /*const play = ({
