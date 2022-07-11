@@ -191,10 +191,8 @@ if (localStorage.getItem("songHist") == null) {
 
 
 
-tBody.on("click", $(".listen"), function (event) {
+$("table").on("click", ".listen", function (event) {
     event.stopPropagation();
-
-    if (event.target.classList.contains("listen")) {
 
         console.log("working");
 
@@ -219,13 +217,12 @@ tBody.on("click", $(".listen"), function (event) {
             newTr.append(histAppend[i]);
 
         };
-    };
-});
+    });
 
-/*tBody.on("click", $(".listen"), function (event) {
+/*$("table").on("click", ".listen", function (event) {
     event.stopPropagation();
 
-    if (event.target.classList.contains("listen")) {
+    
         // Spotify SDK URI
         /*const play = ({
             spotify_uri,
@@ -288,4 +285,4 @@ tBody.on("click", $(".listen"), function (event) {
 
             player.connect();
         }
-            }})*/
+            })*/

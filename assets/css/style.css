@@ -3,7 +3,7 @@
     font-weight: 600;
 }
 body{
-    height: 100vh;
+    height: 95vh;
     width: 100vw;
     overflow-y: hidden;
 }
@@ -74,4 +74,9 @@ h1, h2{
     body{
         overflow-y: scroll;
     }
+
+    main{
+        margin-bottom: 3%;
+    }
+
 }
