@@ -17,8 +17,10 @@ if (localStorage.getItem("data") !== null) {
     var data = JSON.parse(localStorage.getItem("data"))
     var lng = data.results[0].geometry.lng
     var lat = data.results[0].geometry.lat
-    console.log(data)
+ 
     locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
+    locateBtn.parent().css("padding-left", "35%")
+    
     locateBtn.remove()
     $("[w-type]").attr("w-latlong", `${lat},${lng}`)
 }
@@ -33,7 +35,8 @@ function locateUser(event) {
             .then(function (data) {
 
                 locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
-                locateBtn.parent().addClass("loc-style")
+                locateBtn.parent().css("width", "100%")
+              
                 locateBtn.remove()
                 localStorage.setItem("data", JSON.stringify(data))
             }
@@ -67,11 +70,11 @@ var options = {
 
 var histArr = []
 
-//retrieves lyrics of top trending song
+
 fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&format=singles', options)
     .then(response => response.json())
     .then(function (data) {
-
+       
         $("h1").text(`${data.trending[0].strTrack}`)
         $("h2").text(`${data.trending[0].strArtist}`);
         $("img").attr("src", `${data.trending[0].strTrackThumb}`);
@@ -122,7 +125,7 @@ $(".submitBtn").click(function (event) {
         .then(function (data) {
             tBody.empty();
 
-            console.log(data);
+    
 
             //edge case for no api
             if (data.track !== null) {
@@ -133,6 +136,7 @@ $(".submitBtn").click(function (event) {
                 fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
                     .then(response => response.json())
                     .then(function (data) {
+                        
                         $("#songLyrics").empty();
                         if (data.lyrics !== null) {
                             var lyricsArr = data.lyrics.split("\n");
@@ -185,7 +189,7 @@ if (localStorage.getItem("songHist") == null) {
         $(".histTable").append(`<tr class=hist${i}>`);
 
         var newTr = $(`.hist${i}`);
-        console.log(histArr[i]);
+      
         newTr.append(histArr[i]);
     }
 }
@@ -195,15 +199,13 @@ if (localStorage.getItem("songHist") == null) {
 $("table").on("click", ".listen", function (event) {
     event.stopPropagation();
 
-    console.log("working");
-
-    //I think the problem is here, getting ta help tomorrow morning         
+           
     var histObj = JSON.parse(localStorage.getItem("songHist"));
 
-    console.log(histObj);
+    
     histArr.unshift($(event.target).parent().parent().html());
 
-    console.log(histArr);
+    
 
     localStorage.setItem(`songHist`, JSON.stringify(histArr));
 
@@ -220,70 +222,11 @@ $("table").on("click", ".listen", function (event) {
     };
 });
 
-/*$("table").on("click", ".listen", function (event) {
-    event.stopPropagation();
+//youtube 
+$("table").on("click", ".listen", function (event) {
+    event.stopPropagation()
+    $(".youtube").html(`<h3><a href = "https://www.youtube.com/results?search_query=${$(event.target).parent().parent().children().eq(0).text()}+${$(event.target).parent().parent().children().eq(1).text()}}">Listen to ${$(event.target).parent().parent().children().eq(0).text()} by ${$(event.target).parent().parent().children().eq(1).text()}</a></h3>`)
+})
 
-    
-        // Spotify SDK URI
-        /*const play = ({
-            spotify_uri,
-            playerInstance: {
-                _options: {
-                    getOAuthToken
-                }
-            }
-        }) => {
-            getOAuthToken(access_token => {
-                fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
-                    method: 'PUT',
-                    body: JSON.stringify({ uris: [spotify_uri] }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${access_token}`
-                    },
-                });
-            });
-        };
 
-        play({
-            playerInstance: new Spotify.Player({ name: "..." }),
-            spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
-        });
 
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            const token = 'BQAJAkKrkod5qCghiemtF1ziauo7mdDJWqdlz_GDCwEiW9V4z3PHz5T7nF5rXR_OK2vSEip-9072N8-gzxdwHZMtkfJeiw3EXsuX46f4ZdnXVGPzbGOlNRy06u9ofatFnc5ixdR62-6-uV7DMIi9MQdVcpAqcOGauxIIwU5GFaRB9LQHG5gC-vVHniezdr8U';
-            const player = new Spotify.Player({
-                name: 'Web Playback SDK Quick Start Player',
-                getOAuthToken: cb => { cb(token); },
-                volume: 0.5
-            });
-
-            // Ready
-            player.addListener('ready', ({ device_id }) => {
-                console.log('Ready with Device ID', device_id);
-            });
-
-            // Not Ready
-            player.addListener('not_ready', ({ device_id }) => {
-                console.log('Device ID has gone offline', device_id);
-            });
-
-            player.addListener('initialization_error', ({ message }) => {
-                console.error(message);
-            });
-
-            player.addListener('authentication_error', ({ message }) => {
-                console.error(message);
-            });
-
-            player.addListener('account_error', ({ message }) => {
-                console.error(message);
-            });
-
-            document.getElementById('togglePlay').onclick = function () {
-                player.togglePlay();
-            };
-
-            player.connect();
-        }
-            })*/

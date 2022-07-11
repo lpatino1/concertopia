@@ -14,6 +14,13 @@ h2 {
     margin-top: 0;
 }
 
+h3{
+    font-size: 22px;
+    font-weight:700;
+    margin: 15% auto 0 auto;
+    text-align: center;
+}
+
 .container {
     width: 100vw;
 }
@@ -79,8 +86,14 @@ h2 {
         overflow-y: scroll;
         height: 95vh;
     }
+    
     .loc-style{
         padding-left: 35%;
+    }
+    h3{
+       
+        margin: 15% auto 0 auto;
+       
     }
     
 }
