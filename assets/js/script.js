@@ -79,7 +79,7 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
         $("h2").text(`${data.trending[0].strArtist}`);
         $("img").attr("src", `${data.trending[0].strTrackThumb}`);
 
-        for (i = 1; i < data.trending.length; i++) {
+        for (i = 0; i < data.trending.length; i++) {
             tBody.append(`<tr class=${i}>`);
 
             var newTr = $(`.${i}`);
@@ -158,7 +158,7 @@ $(".submitBtn").click(function (event) {
                     $("img").attr("src", `${data.track[0].strTrackThumb}`);
                 }
 
-                for (i = 1; i < data.track.length; i++) {
+                for (i = 0; i < data.track.length; i++) {
 
                     tBody.append(`<tr class=iter${i}>`);
 
@@ -227,6 +227,5 @@ $("table").on("click", ".listen", function (event) {
     event.stopPropagation()
     $(".youtube").html(`<h3><a href = "https://www.youtube.com/results?search_query=${$(event.target).parent().parent().children().eq(0).text()}+${$(event.target).parent().parent().children().eq(1).text()}}">Listen to ${$(event.target).parent().parent().children().eq(0).text()} by ${$(event.target).parent().parent().children().eq(1).text()}</a></h3>`)
 })
-
 
 
