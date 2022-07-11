@@ -13,14 +13,14 @@ var locateBtn = $(".locate")
 //user Location
 //success call back
 
-if(localStorage.getItem("data") !== null){
+if (localStorage.getItem("data") !== null) {
     var data = JSON.parse(localStorage.getItem("data"))
     var lng = data.results[0].geometry.lng
     var lat = data.results[0].geometry.lat
     console.log(data)
     locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
     locateBtn.remove()
-    $("[w-type]").attr("w-latlong",`${lat},${lng}`)
+    $("[w-type]").attr("w-latlong", `${lat},${lng}`)
 }
 
 function locateUser(event) {
@@ -71,34 +71,31 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
     .then(response => response.json())
     .then(function (data) {
 
-        
-
         $("h1").text(`${data.trending[0].strTrack}`)
-        $("h2").text(`${data.trending[0].strArtist}`)
-        $("img").attr("src", `${data.trending[0].strTrackThumb}`)
+        $("h2").text(`${data.trending[0].strArtist}`);
+        $("img").attr("src", `${data.trending[0].strTrackThumb}`);
 
         for (i = 1; i < data.trending.length; i++) {
-            tBody.append(`<tr class=${i}>`)
+            tBody.append(`<tr class=${i}>`);
 
-            var newTr = $(`.${i}`)
+            var newTr = $(`.${i}`);
 
-            newTr.append(`<td>${data.trending[i].strTrack}</td>`)
-            newTr.append(`<td>${data.trending[i].strArtist}</td>`)
-            newTr.append(`<td>${data.trending[i].strAlbum}</td>`)
-            newTr.append(`<td><a class="listen waves-effect waves-light btn">Play</a></td>`)
+            newTr.append(`<td>${data.trending[i].strTrack}</td>`);
+            newTr.append(`<td>${data.trending[i].strArtist}</td>`);
+            newTr.append(`<td>${data.trending[i].strAlbum}</td>`);
+            newTr.append(`<td><a class="listen waves-effect waves-light btn">Play</a></td>`);
         }
 
-        searchName = data.trending[0].strArtist
-        searchSong = data.trending[0].strTrack
-
+        searchName = data.trending[0].strArtist;
+        searchSong = data.trending[0].strTrack;
 
         fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
             .then(response => response.json())
             .then(function (data) {
                 var lyricsArr = data.lyrics.split("\n")
-                $("#songLyrics").text("")
+                $("#songLyrics").text("");
                 for (i = 0; i < lyricsArr.length; i++) {
-                    $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)
+                    $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`);
                 }
             }
             )
@@ -106,7 +103,7 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
     .catch(err => console.error(err));
 
 //function for artist search
-var searchArt = $(".artistName")
+var searchArt = $(".artistName");
 $(".submitBtn").click(function (event) {
 
     event.stopPropagation();
@@ -124,25 +121,22 @@ $(".submitBtn").click(function (event) {
         .then(function (data) {
             tBody.empty();
 
-
-            console.log(data)
+            console.log(data);
 
             //edge case for no api
             if (data.track !== null) {
-                searchName = data.track[0].strArtist
-                searchSong = data.track[0].strTrack
-
-
+                searchName = data.track[0].strArtist;
+                searchSong = data.track[0].strTrack;
 
                 //lyrics api
                 fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
                     .then(response => response.json())
                     .then(function (data) {
-                        $("#songLyrics").empty()
+                        $("#songLyrics").empty();
                         if (data.lyrics !== null) {
-                            var lyricsArr = data.lyrics.split("\n")
+                            var lyricsArr = data.lyrics.split("\n");
                             for (i = 0; i < lyricsArr.length; i++) {
-                                $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`)
+                                $("#songLyrics").append(`<li>${lyricsArr[i]}</li>`);
                             }
                         }
                     }
@@ -150,149 +144,148 @@ $(".submitBtn").click(function (event) {
             }
 
             if (data.track !== null) {
-                $("h1").text(`${data.track[0].strTrack}`)
-                $("h2").text(`${data.track[0].strArtist}`)
+                $("h1").text(`${data.track[0].strTrack}`);
+                $("h2").text(`${data.track[0].strArtist}`);
 
                 if (data.track[0].strTrackThumb === null) {
-                    $("img").attr("src", "./assets/images/placeholder.png")
+                    $("img").attr("src", "./assets/images/placeholder.png");
                 } else {
-                    $("img").attr("src", `${data.track[0].strTrackThumb}`)
+                    $("img").attr("src", `${data.track[0].strTrackThumb}`);
                 }
 
                 for (i = 1; i < data.track.length; i++) {
 
-                    tBody.append(`<tr class=iter${i}>`)
+                    tBody.append(`<tr class=iter${i}>`);
 
-                    var newTr = $(`.iter${i}`)
+                    var newTr = $(`.iter${i}`);
 
-                    newTr.append(`<td>${data.track[i].strTrack}</td>`)
-                    newTr.append(`<td>${data.track[i].strArtist}</td>`)
-                    newTr.append(`<td>${data.track[i].strAlbum}</td>`)
-                    newTr.append(`<td><a class="listen waves-effect waves-light btn">Play</a></td>`)
-
+                    newTr.append(`<td>${data.track[i].strTrack}</td>`);
+                    newTr.append(`<td>${data.track[i].strArtist}</td>`);
+                    newTr.append(`<td>${data.track[i].strAlbum}</td>`);
+                    newTr.append(`<td><a class="listen waves-effect waves-light btn">Play</a></td>`);
 
                 }
             } else {
-                $("h1").text(`Artist not found, please search for another.`)
-                $("h2").text("")
-                $("img").attr("src", "./assets/images/placeholder.png")
+                $("h1").text(`Artist not found, please search for another.`);
+                $("h2").text("");
+                $("img").attr("src", "./assets/images/placeholder.png");
             }
 
         })
-}
-
-)
+})
 
 histArr = []
-if (localStorage.getItem("songHist")==null){
-    localStorage.setItem("songHist", JSON.stringify(histArr))
-}else{
+if (localStorage.getItem("songHist") == null) {
+    localStorage.setItem("songHist", JSON.stringify(histArr));
+} else {
     $(".histTable").empty()
-    var histAppend = JSON.parse(localStorage.getItem(`songHist`))
-    for (i = 0; i < histAppend.length; i++) {
-        $(".histTable").append(`<tr class=hist${i}>`)
+    histArr = JSON.parse(localStorage.getItem(`songHist`));
+    for (i = 0; i < histArr.length; i++) {
+        $(".histTable").append(`<tr class=hist${i}>`);
 
-        var newTr = $(`.hist${i}`)
-        console.log(histAppend[i])
-        newTr.append(histAppend[i])
-}
+        var newTr = $(`.hist${i}`);
+        console.log(histArr[i]);
+        newTr.append(histArr[i]);
+    }
 }
 
 
 
 tBody.on("click", $(".listen"), function (event) {
-    event.stopPropagation()
-    
+    event.stopPropagation();
 
     if (event.target.classList.contains("listen")) {
-        
-        console.log("working")
-            
-            //I think the problem is here, getting ta help tomorrow morning
-            var histObj = JSON.parse(localStorage.getItem("songHist"))
-            histArr.push(histObj.values())
-            console.log(histObj)
-            histArr.unshift($(event.target).parent().parent().html())
-          
-            console.log(histArr)
-           
-            localStorage.setItem(`songHist`, JSON.stringify(histArr))
+
+        console.log("working");
+
+        //I think the problem is here, getting ta help tomorrow morning         
+        var histObj = JSON.parse(localStorage.getItem("songHist"));
+
+        console.log(histObj);   
+        histArr.unshift($(event.target).parent().parent().html());
+
+        console.log(histArr);
+
+        localStorage.setItem(`songHist`, JSON.stringify(histArr));
 
 
-            $(".histTable").empty()
-            var histAppend = JSON.parse(localStorage.getItem(`songHist`))
-            for (i = 0; i < histAppend.length; i++) {
-                $(".histTable").append(`<tr class=hist${i}>`)
+        $(".histTable").empty();
+        var histAppend = JSON.parse(localStorage.getItem(`songHist`));
+        for (i = 0; i < histAppend.length; i++) {
+            $(".histTable").append(`<tr class=hist${i}>`);
 
-                var newTr = $(`.hist${i}`)
-               
-                newTr.append(histAppend[i])
-            
+            var newTr = $(`.hist${i}`);
 
-            //spotify code
+            newTr.append(histAppend[i]);
 
-  }
-}})
-
-// Spotify SDK URI
-/*const play = ({
-    spotify_uri,
-    playerInstance: {
-        _options: {
-            getOAuthToken
-        }
-    }
-}) => {
-    getOAuthToken(access_token => {
-        fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
-            method: 'PUT',
-            body: JSON.stringify({ uris: [spotify_uri] }),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${access_token}`
-            },
-        });
-    });
-};
-
-play({
-    playerInstance: new Spotify.Player({ name: "..." }),
-    spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+        };
+    };
 });
 
-window.onSpotifyWebPlaybackSDKReady = () => {
-    const token = 'BQAJAkKrkod5qCghiemtF1ziauo7mdDJWqdlz_GDCwEiW9V4z3PHz5T7nF5rXR_OK2vSEip-9072N8-gzxdwHZMtkfJeiw3EXsuX46f4ZdnXVGPzbGOlNRy06u9ofatFnc5ixdR62-6-uV7DMIi9MQdVcpAqcOGauxIIwU5GFaRB9LQHG5gC-vVHniezdr8U';
-    const player = new Spotify.Player({
-        name: 'Web Playback SDK Quick Start Player',
-        getOAuthToken: cb => { cb(token); },
-        volume: 0.5
-    });
+/*tBody.on("click", $(".listen"), function (event) {
+    event.stopPropagation();
 
-    // Ready
-    player.addListener('ready', ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
-    });
+    if (event.target.classList.contains("listen")) {
+        // Spotify SDK URI
+        /*const play = ({
+            spotify_uri,
+            playerInstance: {
+                _options: {
+                    getOAuthToken
+                }
+            }
+        }) => {
+            getOAuthToken(access_token => {
+                fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ uris: [spotify_uri] }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${access_token}`
+                    },
+                });
+            });
+        };
 
-    // Not Ready
-    player.addListener('not_ready', ({ device_id }) => {
-        console.log('Device ID has gone offline', device_id);
-    });
+        play({
+            playerInstance: new Spotify.Player({ name: "..." }),
+            spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+        });
 
-    player.addListener('initialization_error', ({ message }) => {
-        console.error(message);
-    });
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            const token = 'BQAJAkKrkod5qCghiemtF1ziauo7mdDJWqdlz_GDCwEiW9V4z3PHz5T7nF5rXR_OK2vSEip-9072N8-gzxdwHZMtkfJeiw3EXsuX46f4ZdnXVGPzbGOlNRy06u9ofatFnc5ixdR62-6-uV7DMIi9MQdVcpAqcOGauxIIwU5GFaRB9LQHG5gC-vVHniezdr8U';
+            const player = new Spotify.Player({
+                name: 'Web Playback SDK Quick Start Player',
+                getOAuthToken: cb => { cb(token); },
+                volume: 0.5
+            });
 
-    player.addListener('authentication_error', ({ message }) => {
-        console.error(message);
-    });
+            // Ready
+            player.addListener('ready', ({ device_id }) => {
+                console.log('Ready with Device ID', device_id);
+            });
 
-    player.addListener('account_error', ({ message }) => {
-        console.error(message);
-    });
+            // Not Ready
+            player.addListener('not_ready', ({ device_id }) => {
+                console.log('Device ID has gone offline', device_id);
+            });
 
-    document.getElementById('togglePlay').onclick = function () {
-        player.togglePlay();
-    };
+            player.addListener('initialization_error', ({ message }) => {
+                console.error(message);
+            });
 
-    player.connect();
-}*/
+            player.addListener('authentication_error', ({ message }) => {
+                console.error(message);
+            });
+
+            player.addListener('account_error', ({ message }) => {
+                console.error(message);
+            });
+
+            document.getElementById('togglePlay').onclick = function () {
+                player.togglePlay();
+            };
+
+            player.connect();
+        }
+            }})*/
