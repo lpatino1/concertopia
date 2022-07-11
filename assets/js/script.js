@@ -1,6 +1,5 @@
-
 ////////////////////////////////////////////////////////////////////////////////
-//Ticketmaster Widget Location
+
 
 //Mobile Collapse Navbar from Materialize
 $(document).ready(function () {
@@ -9,6 +8,7 @@ $(document).ready(function () {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////readability/modularity
 var locateBtn = $(".locate")
+
 
 //user Location
 //success call back
@@ -23,14 +23,14 @@ if (localStorage.getItem("data") !== null) {
     
     
     locateBtn.remove()
-    $("[w-type]").attr("w-latlong", `${lat},${lng}`)
 }
 
 function locateUser(event) {
     event.stopPropagation()
     navigator.geolocation.getCurrentPosition(function (position) {
         var lat = position.coords.latitude;
-        var long = position.coords.longitude
+        var long = position.coords.longitude;
+        
         fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${long}&key=888ab51ae378491c9cc6646f56803e81`)
             .then(response => response.json())
             .then(function (data) {
@@ -43,6 +43,7 @@ function locateUser(event) {
             }
             )
     }, locationDenied)
+    
 }
 
 locateBtn.click(locateUser)
@@ -78,7 +79,7 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
        
         $("h1").text(`${data.trending[0].strTrack}`)
         $("h2").text(`${data.trending[0].strArtist}`);
-        $("img").attr("src", `${data.trending[0].strTrackThumb}`);
+        $(".albumArt").attr("src", `${data.trending[0].strTrackThumb}`);
 
         for (i = 0; i < data.trending.length; i++) {
             tBody.append(`<tr class=${i}>`);
@@ -154,9 +155,9 @@ $(".submitBtn").click(function (event) {
                 $("h2").text(`${data.track[0].strArtist}`);
 
                 if (data.track[0].strTrackThumb === null) {
-                    $("img").attr("src", "./assets/images/placeholder.png");
+                    $(".albumArt").attr("src", "./assets/images/placeholder.png");
                 } else {
-                    $("img").attr("src", `${data.track[0].strTrackThumb}`);
+                    $(".albumArt").attr("src", `${data.track[0].strTrackThumb}`);
                 }
 
                 for (i = 0; i < data.track.length; i++) {
@@ -174,10 +175,11 @@ $(".submitBtn").click(function (event) {
             } else {
                 $("h1").text(`Artist not found, please search for another.`);
                 $("h2").text("");
-                $("img").attr("src", "./assets/images/placeholder.png");
+                $(".albumArt").attr("src", "./assets/images/placeholder.png");
             }
 
         })
+
 })
 
 histArr = []
