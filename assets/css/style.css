@@ -70,6 +70,8 @@ h1, h2{
     max-height: 21vh;
 }
 
-.maxWidth{
-    width: 100%;
+@media screen and (max-width: 600px) {
+    body{
+        overflow-y: scroll;
+    }
 }

@@ -15,9 +15,12 @@ var locateBtn = $(".locate")
 
 if(localStorage.getItem("data") !== null){
     var data = JSON.parse(localStorage.getItem("data"))
+    var lng = data.results[0].geometry.lng
+    var lat = data.results[0].geometry.lat
     console.log(data)
     locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
     locateBtn.remove()
+    $("[w-type]").attr("w-latlong",`${lat},${lng}`)
 }
 
 function locateUser(event) {
@@ -190,7 +193,7 @@ if (localStorage.getItem("songHist")==null){
         $(".histTable").append(`<tr class=hist${i}>`)
 
         var newTr = $(`.hist${i}`)
-   
+        console.log(histAppend[i])
         newTr.append(histAppend[i])
 }
 }
@@ -207,7 +210,7 @@ tBody.on("click", $(".listen"), function (event) {
             
             //I think the problem is here, getting ta help tomorrow morning
             var histObj = JSON.parse(localStorage.getItem("songHist"))
-            histArr.push(histObj)
+            histArr.push(histObj.values())
             console.log(histObj)
             histArr.unshift($(event.target).parent().parent().html())
           
