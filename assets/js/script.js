@@ -33,6 +33,7 @@ function locateUser(event) {
             .then(function (data) {
 
                 locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
+                locateBtn.parent().addClass("loc-style")
                 locateBtn.remove()
                 localStorage.setItem("data", JSON.stringify(data))
             }
@@ -194,30 +195,30 @@ if (localStorage.getItem("songHist") == null) {
 $("table").on("click", ".listen", function (event) {
     event.stopPropagation();
 
-        console.log("working");
+    console.log("working");
 
-        //I think the problem is here, getting ta help tomorrow morning         
-        var histObj = JSON.parse(localStorage.getItem("songHist"));
+    //I think the problem is here, getting ta help tomorrow morning         
+    var histObj = JSON.parse(localStorage.getItem("songHist"));
 
-        console.log(histObj);   
-        histArr.unshift($(event.target).parent().parent().html());
+    console.log(histObj);
+    histArr.unshift($(event.target).parent().parent().html());
 
-        console.log(histArr);
+    console.log(histArr);
 
-        localStorage.setItem(`songHist`, JSON.stringify(histArr));
+    localStorage.setItem(`songHist`, JSON.stringify(histArr));
 
 
-        $(".histTable").empty();
-        var histAppend = JSON.parse(localStorage.getItem(`songHist`));
-        for (i = 0; i < histAppend.length; i++) {
-            $(".histTable").append(`<tr class=hist${i}>`);
+    $(".histTable").empty();
+    var histAppend = JSON.parse(localStorage.getItem(`songHist`));
+    for (i = 0; i < histAppend.length; i++) {
+        $(".histTable").append(`<tr class=hist${i}>`);
 
-            var newTr = $(`.hist${i}`);
+        var newTr = $(`.hist${i}`);
 
-            newTr.append(histAppend[i]);
+        newTr.append(histAppend[i]);
 
-        };
-    });
+    };
+});
 
 /*$("table").on("click", ".listen", function (event) {
     event.stopPropagation();
