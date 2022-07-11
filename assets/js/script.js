@@ -18,8 +18,9 @@ if (localStorage.getItem("data") !== null) {
     var lng = data.results[0].geometry.lng
     var lat = data.results[0].geometry.lat
  
+    locateBtn.parent().addClass("loc-style")
     locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
-    locateBtn.parent().css("padding-left", "35%")
+    
     
     locateBtn.remove()
     $("[w-type]").attr("w-latlong", `${lat},${lng}`)
@@ -35,7 +36,7 @@ function locateUser(event) {
             .then(function (data) {
 
                 locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
-                locateBtn.parent().css("width", "100%")
+                locateBtn.parent().addClass("loc-style")
               
                 locateBtn.remove()
                 localStorage.setItem("data", JSON.stringify(data))
@@ -225,7 +226,7 @@ $("table").on("click", ".listen", function (event) {
 //youtube 
 $("table").on("click", ".listen", function (event) {
     event.stopPropagation()
-    $(".youtube").html(`<h3><a href = "https://www.youtube.com/results?search_query=${$(event.target).parent().parent().children().eq(0).text()}+${$(event.target).parent().parent().children().eq(1).text()}}">Listen to ${$(event.target).parent().parent().children().eq(0).text()} by ${$(event.target).parent().parent().children().eq(1).text()}</a></h3>`)
+    $(".youtube").html(`<h3><a href = "https://www.youtube.com/results?search_query=${$(event.target).parent().parent().children().eq(0).text()}+${$(event.target).parent().parent().children().eq(1).text()}}" target="_blank">Listen to ${$(event.target).parent().parent().children().eq(0).text()} by ${$(event.target).parent().parent().children().eq(1).text()}</a></h3>`)
 })
 
 
