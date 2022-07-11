@@ -19,6 +19,8 @@ if (localStorage.getItem("data") !== null) {
     var lat = data.results[0].geometry.lat
     console.log(data)
     locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
+    locateBtn.parent().css("padding-left", "35%")
+    console.log(locateBtn.parent())
     locateBtn.remove()
     $("[w-type]").attr("w-latlong", `${lat},${lng}`)
 }
@@ -33,7 +35,8 @@ function locateUser(event) {
             .then(function (data) {
 
                 locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
-                locateBtn.parent().addClass("loc-style")
+                locateBtn.parent().css("width", "100%")
+                console.log(locateBtn.parent())
                 locateBtn.remove()
                 localStorage.setItem("data", JSON.stringify(data))
             }
