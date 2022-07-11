@@ -69,3 +69,7 @@ h1, h2{
 #max-table{
     max-height: 21vh;
 }
+
+.maxWidth{
+    width: 100%;
+}
