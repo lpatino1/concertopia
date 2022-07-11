@@ -1,0 +1,121 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden;
+}
+
+h1,
+h2 {
+    margin-top: 0;
+}
+
+h3{
+    font-size: 22px;
+    font-weight:700;
+    margin: 15% auto 0 auto;
+    text-align: center;
+}
+
+.container {
+    width: 100vw;
+}
+
+.brand-logo {
+    margin-left: 6%;
+}
+
+.marg-right {
+    margin-right: 2.4%;
+}
+
+
+.navbar-fixed {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navSpacer {
+    margin-top: 2%;
+}
+
+.pageHeight {
+    height: 100vh
+}
+
+#ulScroll {
+    max-height: 200px;
+    overflow-y: scroll
+}
+
+.scroll {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.asideCard {
+    height: 25vh;
+}
+
+.boxCheck {
+    border: 5px solid black;
+}
+
+.albumArt {
+    margin: 0 auto 0 auto;
+    height: 50%;
+    width: 100%;
+    padding: 2%;
+}
+
+.events-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#max-table {
+    max-height: 21vh;
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        overflow-y: scroll;
+        height: 95vh;
+    }
+    
+    .loc-style{
+        padding-left: 35%;
+    }
+    h3{
+       
+        margin: 15% auto 0 auto;
+       
+    }
+    
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        overflow-y: scroll;
+    }
+
+    h1,
+    h2 {
+        font-size: 20px;
+        font-weight: 800
+    }
+
+    main {
+        margin-bottom: 5%;
+    }
+
+    #ulScroll {
+        max-height: 150px;
+
+    }
+
+}

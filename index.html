@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta>
+    <title>Concertopia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300&family=Shadows+Into+Light&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Concertopia</title>
+</head>
+
+<body>
+
+    <!-- Mobile Collapse, from Materialize: -->
+
+    <nav class="grey darken-4">
+        <div class="nav-wrapper">
+            <a href="https://github.com/lpatino1/project-1" class="brand-logo">Concertopia</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down marg-right">
+                
+                <li><input placeholder="Artist Name" type="text" class="submit white-text artistName">
+                    <label for="artistName"></label>
+                </li>
+                <li><a class="waves-effect waves-light btn submitBtn">Search</a></li>
+                <li><a class="waves-effect waves-light btn locate pulse">Allow Location Access</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li> <input placeholder="Artist Name" type="text" class="artistName">
+            <label for="artistName"></label>
+        </li>
+        <li><a class="waves-effect waves-light btn submitBtn">Search</a></li>
+        <li><a class="waves-effect waves-light btn locate">Allow Location Access</a></li>
+        
+    </ul>
+
+    <!-- end of Mobile Collapse -->
+
+
+    <div class="row navSpacer">
+
+        <main>
+            <div class=" col s12 m12 l8">
+                <div class="row">
+                    <div class="col s0 m0 l1"></div>
+                    <div class="col s7">
+                        <h1>Song Name</h1>
+                        <h2>Artist Name</h2>
+                        <div id="ulScroll">
+                            <ul id="songLyrics">
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col s4">
+                        <img src="./assets/images/placeholder.png" class="albumArt">
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col s1"></div>
+                    <div class="col s11 scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Song</th>
+                                    <th>Artist</th>
+                                    <th>Album</th>
+                                    <th>Listen</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="mainTable">
+
+                            </tbody>
+                        </table>
+                        <div class="row"><div class="col s12"></div></div>
+                    </div>
+                </div>
+
+        </main>
+
+        <div class=" col s12 m12 l4 ">
+            <aside>
+                <div class="row ">
+                    <div class="col s1"></div>
+                    <!--create dynamically-->
+                    <div class="col s10">
+                        <div class="card-stacked events-container">
+                            <div w-type="event-discovery" w-tmapikey="K4bW9KYnGTzMZH5cHGLHBQ6Y2l0AO1cQ"
+                                w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="music" w-theme="simple"
+                                w-colorscheme="light" w-width="512" w-height="286" w-size="15" w-border="0"
+                                w-borderradius="4" w-radius="50" w-period="month" w-layout="horizontal"
+                                w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid=""
+                                w-proportion="xxl" w-titlelink="off" w-sorting="groupByName" w-id="id_tnbbka"
+                                w-source="" w-branding="Ticketmaster" w-latlong=>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="col s1"></div>
+                </div>
+
+                <div class="row ">
+                    <div class="col s1"></div>
+                    <div class="col s10">
+                        <div class="card horizontal asideCard">
+                            <div class="card-stacked">
+                                <div class="card-content youtube"></div>
+                                    <!-- Spotify SDK Widget -->
+                                    
+                                
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s1"></div>
+                </div>
+
+                <div class="row ">
+                    <div class="col s1"></div>
+                    <div class="col s10">
+                        <div class="card horizontal asideCard">
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <div class="row">
+                                        
+                                        <div class="col s12 scroll" id="max-table">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Song</th>
+                                                        <th>Artist</th>
+                                                        <th>Album</th>
+                                                        <th>Listen</th>
+                                                    </tr>
+                                                </thead>
+                    
+                                                <tbody class="histTable">
+                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+    </div>
+    </div>
+    <footer>
+
+    </footer>
+    <!-- Compiled and minified JavaScript -->
+    <script
+        src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--<script src="https://sdk.scdn.co/spotify-player.js"></script>-->
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
