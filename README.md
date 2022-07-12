@@ -66,7 +66,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 In the future, our team would update the following features:
 
-- embedded music player that plays songs from the searched artist 
-- linking directly to Spotify 
-- Ticketmaster concerts
-- keeping the page non-scrollable to match web app aesthetics  
+- Spotify API integration
+  - Retrieve data from user spotify account, showing relevant artists
+  - Play songs without leaving concertopia
+- Ticket Master Discovery API integration
+  - Search for nearby events without enabling location access a second time
+  - Search for events by artist
+- Youtube API Integration
+  - See music videos without leaving concertopia
+
