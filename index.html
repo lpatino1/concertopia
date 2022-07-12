@@ -22,25 +22,29 @@
         <div class="nav-wrapper">
             <a href="https://github.com/lpatino1/project-1" class="brand-logo">Concertopia</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down marg-right">
-                
-                <li><input placeholder="Artist Name" type="text" class="submit white-text artistName">
-                    <label for="artistName"></label>
-                </li>
-                <li><a class="waves-effect waves-light btn submitBtn">Search</a></li>
-                <li><a class="waves-effect waves-light btn locate pulse">Allow Location Access</a></li>
-            </ul>
+                <div id="searchClickHandle">
+                    <ul class="right hide-on-med-and-down marg-right">
+                        
+                        <li><input placeholder="Artist Name" type="text" class="submit white-text" id="artistName">
+                            <label for="artistName"></label>
+                        </li>
+                        <li><a class="waves-effect waves-light btn submitBtn">Search</a></li>
+                        <li><a class="waves-effect waves-light btn locate pulse">Allow Location Access</a></li>
+                    </ul>
+                 </div>
         </div>
     </nav>
 
-    <ul class="sidenav" id="mobile-demo">
-        <li> <input placeholder="Artist Name" type="text" class="artistName">
-            <label for="artistName"></label>
-        </li>
-        <li><a class="waves-effect waves-light btn submitBtn">Search</a></li>
-        <li><a class="waves-effect waves-light btn locate">Allow Location Access</a></li>
-        
-    </ul>
+    <div id="searchClickHandleCollapse">
+        <ul class="sidenav" id="mobile-demo">
+            <li> <input placeholder="Artist Name" type="text" class="submit" id="artistNameCollapse">
+                <label for="artistName"></label>
+            </li>
+            <li><a class="waves-effect waves-light btn submitBtn">Search</a></li>
+            <li><a class="waves-effect waves-light btn locate">Allow Location Access</a></li>
+            
+        </ul>
+    </div>
 
     <!-- end of Mobile Collapse -->
 

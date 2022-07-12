@@ -17,10 +17,10 @@ if (localStorage.getItem("data") !== null) {
     var data = JSON.parse(localStorage.getItem("data"))
     var lng = data.results[0].geometry.lng
     var lat = data.results[0].geometry.lat
- 
+
     locateBtn.parent().addClass("loc-style")
     locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
-    
+
     locateBtn.remove()
 }
 
@@ -29,20 +29,20 @@ function locateUser(event) {
     navigator.geolocation.getCurrentPosition(function (position) {
         var lat = position.coords.latitude;
         var long = position.coords.longitude;
-        
+
         fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${long}&key=888ab51ae378491c9cc6646f56803e81`)
             .then(response => response.json())
             .then(function (data) {
 
                 locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
                 locateBtn.parent().addClass("loc-style")
-              
+
                 locateBtn.remove()
                 localStorage.setItem("data", JSON.stringify(data))
             }
             )
     }, locationDenied)
-    
+
 }
 
 locateBtn.click(locateUser)
@@ -51,13 +51,6 @@ locateBtn.click(locateUser)
 function locationDenied() {
     locateBtn.addClass("hide")
 }
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////readability/modularity
-
-
-//condition for if user refuses location info - display USA top charts, functionality wont change much except ticketmaster search range will be updated to the whole US
-
 
 tBody = $(".mainTable")
 //on page load popular artsists/song info is shown
@@ -75,7 +68,7 @@ var histArr = []
 fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&format=singles', options)
     .then(response => response.json())
     .then(function (data) {
-       
+
         $("h1").text(`${data.trending[0].strTrack}`)
         $("h2").text(`${data.trending[0].strArtist}`);
         $(".albumArt").attr("src", `${data.trending[0].strTrackThumb}`);
@@ -108,10 +101,31 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
     .catch(err => console.error(err));
 
 //function for artist search
-var searchArt = $(".artistName");
-$(".submitBtn").click(function (event) {
+var searchArt
 
-    event.stopPropagation();
+$("#searchClickHandle").on("click", ".submitBtn", valCheck)
+$("#searchClickHandleCollapse").on("click", ".submitBtn", valCheck)
+
+
+function valCheck() {
+    if ($("#artistName").val() === "") {
+        console.log($("artistNameCollapse").val())
+        searchArt = $("#artistNameCollapse").val()
+        $("artistNameCollapse").val("")
+        searchArtists(searchArt)
+    } else{
+        searchArt = $("#artistName").val()
+        $("#artistName").val("")
+        searchArtists(searchArt)
+        console.log("else")
+    }
+}
+
+function searchArtists() {
+    console.log(searchArt)
+
+    event.stopPropagation()
+   
 
     var optionsSearch = {
         method: 'GET',
@@ -121,7 +135,7 @@ $(".submitBtn").click(function (event) {
         }
     };
     //artist search audiodb
-    fetch(`https://theaudiodb.p.rapidapi.com/track-top10.php?s=${searchArt.val()}`, optionsSearch)
+    fetch(`https://theaudiodb.p.rapidapi.com/track-top10.php?s=${searchArt}`, optionsSearch)
         .then(response => response.json())
         .then(function (data) {
             tBody.empty();
@@ -135,7 +149,7 @@ $(".submitBtn").click(function (event) {
                 fetch(`https://api.lyrics.ovh/v1/${searchName}/${searchSong}`)
                     .then(response => response.json())
                     .then(function (data) {
-                        
+
                         $("#songLyrics").empty();
                         if (data.lyrics !== null) {
                             var lyricsArr = data.lyrics.split("\n");
@@ -177,7 +191,7 @@ $(".submitBtn").click(function (event) {
 
         })
 
-})
+}
 
 histArr = []
 if (localStorage.getItem("songHist") == null) {
@@ -189,7 +203,7 @@ if (localStorage.getItem("songHist") == null) {
         $(".histTable").append(`<tr class=hist${i}>`);
 
         var newTr = $(`.hist${i}`);
-      
+
         newTr.append(histArr[i]);
     }
 }
@@ -199,13 +213,13 @@ if (localStorage.getItem("songHist") == null) {
 $("table").on("click", ".listen", function (event) {
     event.stopPropagation();
 
-           
+
     var histObj = JSON.parse(localStorage.getItem("songHist"));
 
-    
+
     histArr.unshift($(event.target).parent().parent().html());
 
-    
+
 
     localStorage.setItem(`songHist`, JSON.stringify(histArr));
 
