@@ -21,7 +21,6 @@ if (localStorage.getItem("data") !== null) {
     locateBtn.parent().addClass("loc-style")
     locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
     
-    
     locateBtn.remove()
 }
 
@@ -127,8 +126,6 @@ $(".submitBtn").click(function (event) {
         .then(function (data) {
             tBody.empty();
 
-    
-
             //edge case for no api
             if (data.track !== null) {
                 searchName = data.track[0].strArtist;
@@ -228,7 +225,7 @@ $("table").on("click", ".listen", function (event) {
 //youtube 
 $("table").on("click", ".listen", function (event) {
     event.stopPropagation()
-    $(".youtube").html(`<h3><a href = "https://www.youtube.com/results?search_query=${$(event.target).parent().parent().children().eq(0).text()}+${$(event.target).parent().parent().children().eq(1).text()}}" target="_blank">Listen to ${$(event.target).parent().parent().children().eq(0).text()} by ${$(event.target).parent().parent().children().eq(1).text()}</a></h3>`)
+    $(".youtube").html(`<h4><a href = "https://www.youtube.com/results?search_query=${$(event.target).parent().parent().children().eq(0).text()}+${$(event.target).parent().parent().children().eq(1).text()}}" target="_blank">${$(event.target).parent().parent().children().eq(0).text()} by ${$(event.target).parent().parent().children().eq(1).text()}</a></h4>`)
 })
 
 
