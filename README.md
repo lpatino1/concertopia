@@ -4,10 +4,10 @@ Please find our deployed app here: https://lpatino1.github.io/project-1/
 
 ## Description
 
-Concertopia is a web app for music lovers and concert goers!  Search for your favorite musical artists, see fun info about them like:
+Concertopia is a web app for music lovers and concert goers!  Search for your favorite musical artists, see fun information about them like:
 - their top-played songs on Spotify
 - lyrics to popular songs
-- find out if your favorite artist is playing any shows or event near you
+- find out if your favorite artist is playing any shows or events near you
 - watch a music video of theirs on YouTube
 
 The purpose of this project was to practice collaboration with fellow web developers and show comprehension and proficiency in the following coding concepts: 
@@ -43,16 +43,13 @@ There are no installation steps to follow before using Concertopia.  Simply foll
 
 Our roles were as follows: 
 
-- GitHub Administrator/dev: Lesli Patino (https://github.com/lpatino1)
+- GitHub Administrator/Dev: Lesli Patino (https://github.com/lpatino1)
 - Dev: Parker McKillop (https://github.com/pem2k)
-- Project Manager/dev: Kristina Glinoga (https://github.com/KGlinoga)
+- Project Manager/Dev: Kristina Glinoga (https://github.com/KGlinoga)
 
 
 Third-Party assets include: 
 - Materialize (https://materializecss.com/)
-- 
-
-If you followed tutorials, include links to those here as well.
 
 ## License
 
@@ -62,9 +59,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Future Plans 
 
-Due to various constraints (including time, security clearances, and curriculum) we were not able to deploy all of our original plans.  We prioritized creating an MVP that fulfills the Project 1 Acceptance Criteria. Given enough time and budget, our team would update the following features:
+In the future, our team would update the following features:
 
 - embedded music player that plays songs from the searched artist 
 - linking directly to Spotify 
-- ticketmaster goals 
-- keeping the page non-scrollable to match web app aesthetics.  
+- ticketmaster 
+- keeping the page non-scrollable to match web app aesthetics  
