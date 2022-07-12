@@ -18,9 +18,9 @@ The purpose of this project was to practice collaboration with fellow web develo
 - utilizing GitHub for collaboration and app deployment
 - user interactivity
 
-Our app, Concertopia, allows users to quickly and easily find fun and functional information about their favorite musical artists.  This includes popular songs, song lyrics, and even links to a music video of their favorite songs.  Concertopia also features a TicketMaster Event Widget that allows users to find upcoming events in their area.
+Our app, Concertopia, allows users to quickly and easily find fun and functional information about their favorite musical artists.  This includes popular songs, song lyrics, and even links to a music video of their favorite songs.  Concertopia also features a TicketMaster Map Widget that allows users to find upcoming events in their area.
 
-This project was very educational for our team, as we tested different API's with various levels of public accessibility.  We landed on the following API's: 
+This project was very educational for our team, as we tested different API's with various levels of public accessibility.  We used the following API's: 
 
 - The Audio DB
 - Lyrcs.ovh
