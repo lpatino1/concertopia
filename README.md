@@ -4,8 +4,8 @@ Please find our deployed app here: https://lpatino1.github.io/concertopia/
 
 ## Description
 
-Concertopia is a web app for music lovers and event goers!  Search for your favorite musical artists and see fun information about them like:
-- their top-played songs on Spotify
+Concertopia is a web app for music lovers and event goers!  Search for your favorite musical artists and see fun information about them and local events like:
+- their top-played songs
 - lyrics to popular songs
 - find events near you
 - watch a music video of theirs on YouTube
@@ -18,9 +18,10 @@ The purpose of this project was to practice collaboration with fellow web develo
 - utilizing GitHub for collaboration and app deployment
 - user interactivity
 
-Our app, Concertopia, allows users to quickly and easily find fun and functional information about their favorite artists.  This includes popular songs, song lyrics, and can even link users to a music video of their favorite songs.  Concertopia also features a TicketMaster Event Widget that allows users to find upcoming events in their area.
+Our app, Concertopia, allows users to quickly and easily find fun and functional information about their favorite musical artists.  This includes popular songs, song lyrics, and even links to a music video of their favorite songs.  Concertopia also features a TicketMaster Event Widget that allows users to find upcoming events in their area.
 
 This project was very educational for our team, as we tested different API's with various levels of public accessibility.  We landed on the following API's: 
+
 - The Audio DB
 - Lyrcs.ovh
 - Open Cage Data Geocoder
