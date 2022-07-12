@@ -7,7 +7,7 @@ Please find our deployed app here: https://lpatino1.github.io/project-1/
 Concertopia is a web app for music lovers and concert goers!  Search for your favorite musical artists, see fun information about them like:
 - their top-played songs on Spotify
 - lyrics to popular songs
-- find out if your favorite artist is playing any shows or events near you
+- find events near you
 - watch a music video of theirs on YouTube
 
 The purpose of this project was to practice collaboration with fellow web developers and show comprehension and proficiency in the following coding concepts: 
@@ -35,7 +35,7 @@ There are no installation steps to follow before using Concertopia.  Simply foll
 *Screenshots to add: 
 - landing page
 - 1 searched artist and the populated fields
-- concert/event card
+- TicketMaster card
 - link to youtube card
 - mobile version (might be multiple screen shots, or a screen-recording of the pop out menu and scrolling experience)*
 
