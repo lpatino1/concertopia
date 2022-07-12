@@ -1,6 +1,5 @@
-
 ////////////////////////////////////////////////////////////////////////////////
-//Ticketmaster Widget Location
+
 
 //Mobile Collapse Navbar from Materialize
 $(document).ready(function () {
@@ -10,6 +9,7 @@ $(document).ready(function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////readability/modularity
 var locateBtn = $(".locate")
 
+
 //user Location
 //success call back
 
@@ -18,30 +18,32 @@ if (localStorage.getItem("data") !== null) {
     var lng = data.results[0].geometry.lng
     var lat = data.results[0].geometry.lat
  
+    locateBtn.parent().addClass("loc-style")
     locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
-    locateBtn.parent().css("padding-left", "35%")
+    
     
     locateBtn.remove()
-    $("[w-type]").attr("w-latlong", `${lat},${lng}`)
 }
 
 function locateUser(event) {
     event.stopPropagation()
     navigator.geolocation.getCurrentPosition(function (position) {
         var lat = position.coords.latitude;
-        var long = position.coords.longitude
+        var long = position.coords.longitude;
+        
         fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${long}&key=888ab51ae378491c9cc6646f56803e81`)
             .then(response => response.json())
             .then(function (data) {
 
                 locateBtn.parent().text(`${data.results[0].components.town}, ${data.results[0].components.state_code}`)
-                locateBtn.parent().css("width", "100%")
+                locateBtn.parent().addClass("loc-style")
               
                 locateBtn.remove()
                 localStorage.setItem("data", JSON.stringify(data))
             }
             )
     }, locationDenied)
+    
 }
 
 locateBtn.click(locateUser)
@@ -77,7 +79,7 @@ fetch('https://theaudiodb.p.rapidapi.com/trending.php?country=us&type=itunes&for
        
         $("h1").text(`${data.trending[0].strTrack}`)
         $("h2").text(`${data.trending[0].strArtist}`);
-        $("img").attr("src", `${data.trending[0].strTrackThumb}`);
+        $(".albumArt").attr("src", `${data.trending[0].strTrackThumb}`);
 
         for (i = 0; i < data.trending.length; i++) {
             tBody.append(`<tr class=${i}>`);
@@ -153,9 +155,9 @@ $(".submitBtn").click(function (event) {
                 $("h2").text(`${data.track[0].strArtist}`);
 
                 if (data.track[0].strTrackThumb === null) {
-                    $("img").attr("src", "./assets/images/placeholder.png");
+                    $(".albumArt").attr("src", "./assets/images/placeholder.png");
                 } else {
-                    $("img").attr("src", `${data.track[0].strTrackThumb}`);
+                    $(".albumArt").attr("src", `${data.track[0].strTrackThumb}`);
                 }
 
                 for (i = 0; i < data.track.length; i++) {
@@ -173,10 +175,11 @@ $(".submitBtn").click(function (event) {
             } else {
                 $("h1").text(`Artist not found, please search for another.`);
                 $("h2").text("");
-                $("img").attr("src", "./assets/images/placeholder.png");
+                $(".albumArt").attr("src", "./assets/images/placeholder.png");
             }
 
         })
+
 })
 
 histArr = []
@@ -225,7 +228,7 @@ $("table").on("click", ".listen", function (event) {
 //youtube 
 $("table").on("click", ".listen", function (event) {
     event.stopPropagation()
-    $(".youtube").html(`<h3><a href = "https://www.youtube.com/results?search_query=${$(event.target).parent().parent().children().eq(0).text()}+${$(event.target).parent().parent().children().eq(1).text()}}">Listen to ${$(event.target).parent().parent().children().eq(0).text()} by ${$(event.target).parent().parent().children().eq(1).text()}</a></h3>`)
+    $(".youtube").html(`<h3><a href = "https://www.youtube.com/results?search_query=${$(event.target).parent().parent().children().eq(0).text()}+${$(event.target).parent().parent().children().eq(1).text()}}" target="_blank">Listen to ${$(event.target).parent().parent().children().eq(0).text()} by ${$(event.target).parent().parent().children().eq(1).text()}</a></h3>`)
 })
 
 
